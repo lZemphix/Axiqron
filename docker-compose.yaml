@@ -1,0 +1,9 @@
+services:
+  bot:
+    ...
+  interface:
+    ...
+  state_manager:
+    ...
+  redis:
+    image: redis:8.4.0

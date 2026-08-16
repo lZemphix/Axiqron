@@ -1,0 +1,22 @@
+[project]
+name = "trade-bot"
+version = "0.1.0"
+description = "Axiqron"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "asyncpg>=0.31.0",
+    "fastapi>=0.125.0",
+    "pybit>=5.13.0",
+    "pydantic-settings>=2.12.0",
+    "python-dotenv>=1.2.1",
+    "redis>=7.1.0",
+    "scikit-learn>=1.9.0",
+    "ta>=0.11.0",
+]
+
+[dependency-groups]
+dev = [
+    "black>=25.12.0",
+    "isort>=7.0.0",
+]
