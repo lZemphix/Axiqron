@@ -6,7 +6,6 @@ from common.utils.types import Result
 
 
 class Postgres:
-
     def __init__(self, user: str, password: str):
         self.host = "0.0.0.0"
         self.port = 5432

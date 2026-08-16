@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 
 class BaseStrategy(ABC):
-
     __name__ = ""
 
     @abstractmethod
