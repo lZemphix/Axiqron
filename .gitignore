@@ -117,3 +117,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Local research and manual test scripts
+get_klines.py
+test.py
