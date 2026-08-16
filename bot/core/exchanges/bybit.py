@@ -1,7 +1,6 @@
 from pybit.unified_trading import HTTP
 
 from bot.core.exchanges._base import Exchange
-from common.configs.settings import settings
 from common.utils.types import Kline, Order
 
 
