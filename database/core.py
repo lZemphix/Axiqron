@@ -33,7 +33,7 @@ class Postgres:
         try:
             res = await self.__fabric("fetchrow", query, args)
             return Result(status=StatusCodesEnum.OK, result=dict(res))
-        except Exception as e:
+        except NameError as e:
             return Result(
                 status=StatusCodesEnum.ERROR,
                 message=e,
@@ -43,14 +43,14 @@ class Postgres:
         try:
             res = await self.__fabric("fetch", query, args)
             return Result(result=list(map(dict, res)))
-        except Exception as e:
+        except NameError as e:
             return Result(status=StatusCodesEnum.ERROR, message=e)
 
     async def execute(self, query: str, *args) -> Result:
         try:
             await self.__fabric("execute", query, args)
             return Result()
-        except Exception as e:
+        except NameError as e:
             return Result(
                 status=StatusCodesEnum.ERROR,
                 message=e,

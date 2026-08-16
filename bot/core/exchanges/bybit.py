@@ -64,7 +64,6 @@ class Bybit(Exchange):
             category=category,
             symbol=currency,
             interval=interval,
-            *args,
             **kwargs,
         )
         if klines.get("retCode") != 0:
@@ -79,7 +78,6 @@ class Bybit(Exchange):
     ) -> list:
         orders = self.conn.get_open_orders(
             category=category,
-            *args,
             **kwargs,
         )
         if orders.get("retCode") != 0:
