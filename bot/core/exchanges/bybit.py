@@ -5,7 +5,6 @@ from common.utils.types import Kline, Order
 
 
 class Bybit(Exchange):
-
     name = "bybit"
 
     def __init__(
@@ -33,24 +32,28 @@ class Bybit(Exchange):
 
     @staticmethod
     def _format_kline(data: list[list[str]]) -> list[Kline]:
-        return [Kline(int(kline[0]), *[float(el) for el in kline[1:]]) for kline in data]
+        return [
+            Kline(int(kline[0]), *[float(el) for el in kline[1:]]) for kline in data
+        ]
 
     @staticmethod
     def _format_orders(data: list[dict]) -> list[Order]:
-        return [Order(
-            symbol=order["symbol"],
-            side=order["side"],
-            order_status=order["orderStatus"],
-            order_type=order["orderType"],
-            order_id=order["orderId"],
-            created_at_ms=int(order["createdTime"]),
-            updated_at_ms=int(order["updatedTime"]),
-            base_price=float(order["basePrice"]),
-            exec_base_value=float(order["cumExecQty"]),
-            exec_quote_value=float(order["cumExecValue"]),
-            fees=order["cumFeeDetail"],
+        return [
+            Order(
+                symbol=order["symbol"],
+                side=order["side"],
+                order_status=order["orderStatus"],
+                order_type=order["orderType"],
+                order_id=order["orderId"],
+                created_at_ms=int(order["createdTime"]),
+                updated_at_ms=int(order["updatedTime"]),
+                base_price=float(order["basePrice"]),
+                exec_base_value=float(order["cumExecQty"]),
+                exec_quote_value=float(order["cumExecValue"]),
+                fees=order["cumFeeDetail"],
             )
-            for order in data]
+            for order in data
+        ]
 
     def get_klines(
         self,
@@ -64,7 +67,6 @@ class Bybit(Exchange):
             category=category,
             symbol=currency,
             interval=interval,
-            *args,
             **kwargs,
         )
         if klines.get("retCode") != 0:
@@ -79,7 +81,6 @@ class Bybit(Exchange):
     ) -> list:
         orders = self.conn.get_open_orders(
             category=category,
-            *args,
             **kwargs,
         )
         if orders.get("retCode") != 0:

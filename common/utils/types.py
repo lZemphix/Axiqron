@@ -21,6 +21,7 @@ class Kline:
     volume: float
     turnover: float
 
+
 @dataclass(frozen=True)
 class Order:
     symbol: str

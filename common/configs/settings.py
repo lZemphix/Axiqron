@@ -18,7 +18,6 @@ class Settings(BaseSettings):
 
 
 class Config:
-
     def __init__(self):
         self.base_dir = Path("../..")
         self.path = "common/configs/bot_config.json"

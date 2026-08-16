@@ -2,7 +2,6 @@ from bot.core.exchanges._base import Exchange
 
 
 class ExchangesList:
-
     def __init__(self):
         self._exchange = {}
 

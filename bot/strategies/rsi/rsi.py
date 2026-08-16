@@ -2,7 +2,6 @@ from bot.strategies.base.fabric import BaseStrategy
 
 
 class RSI(BaseStrategy):
-
     __name__ = "RSI"
 
     def __init__(self, *args, **kwargs):
