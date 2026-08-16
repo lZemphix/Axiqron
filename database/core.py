@@ -2,7 +2,7 @@ from typing import Any
 from asyncpg import Connection, connect
 
 from common.configs.settings import settings
-from common.utils.struct import StatusCodesEnum
+from common.utils.enums import StatusCodesEnum
 from common.utils.types import Result
 
 

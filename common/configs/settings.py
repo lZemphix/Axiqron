@@ -9,7 +9,7 @@ class Settings(BaseSettings):
 
     EXCH_API_KEY: str
     EXCH_API_SECRET: str
-    
+
     TG_BOT_TOKEN: str = None
     TG_USER_ID: int = None
 

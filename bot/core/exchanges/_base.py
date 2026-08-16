@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from common.utils.struct import StatusCodesEnum
+from common.utils.enums import StatusCodesEnum
 
 
 class Exchange(ABC):
