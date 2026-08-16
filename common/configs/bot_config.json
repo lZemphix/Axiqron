@@ -1,4 +1,7 @@
 {
-    "exchange": "Bybit",
-    "currency": "BTCUSDT"
+    "currency": "BTCUSDT",
+    "buy_price": 5.0,
+    "sell_price": 5.0,
+    "max_loss_percent": 5,
+    "max_open_orders": 0
 }
