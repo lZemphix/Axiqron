@@ -1,4 +1,3 @@
-from typing import Any
 from asyncpg import Connection, connect
 
 from common.configs.settings import settings

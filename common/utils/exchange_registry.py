@@ -1,5 +1,4 @@
 from bot.core.exchanges._base import Exchange
-from common.configs.settings import config
 
 
 class ExchangesList:
