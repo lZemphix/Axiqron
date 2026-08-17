@@ -25,15 +25,26 @@ class Config:
     def _get_confing(self) -> dict:
         with open(self.path) as f:
             return json.load(f)
-
-    def get_exchange(self):
-        conf = self._get_confing()
-        return conf["exchange"]
-
+        
     def get_currency(self):
         conf = self._get_confing()
         return conf["currency"]
 
+    def get_buy_price(self):
+        conf = self._get_confing()
+        return conf["buy_price"]
+
+    def get_sell_price(self):
+        conf = self._get_confing()
+        return conf["sell_price"]
+
+    def get_max_loss_percent(self):
+        conf = self._get_confing()
+        return conf["max_loss_percent"]
+
+    def get_max_open_orders(self):
+        conf = self._get_confing()
+        return conf["max_open_orders"]
 
 settings = Settings()
 config = Config()
