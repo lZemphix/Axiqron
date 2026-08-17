@@ -25,7 +25,7 @@ class Config:
     def _get_confing(self) -> dict:
         with open(self.path) as f:
             return json.load(f)
-        
+
     def get_currency(self):
         conf = self._get_confing()
         return conf["currency"]
@@ -45,6 +45,7 @@ class Config:
     def get_max_open_orders(self):
         conf = self._get_confing()
         return conf["max_open_orders"]
+
 
 settings = Settings()
 config = Config()
