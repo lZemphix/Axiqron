@@ -1,6 +1,6 @@
 import pytest
 
-from bot.core.exchanges.bybit import Bybit
+from bot.core.exchanges.http.bybit import Bybit
 from common.utils.types import Kline, Order
 
 
@@ -120,7 +120,7 @@ def test_get_order_history_uses_spot_category_and_converts_orders() -> None:
         {"retCode": 0, "result": {"list": [sample_order()]}}
     )
 
-    history = client.get_order_history()
+    history = client.get_order_history(category="spot")
 
     assert history[0].order_id == "order-123"
     assert connection.calls == [("get_order_history", {"category": "spot"})]

@@ -1,0 +1,6 @@
+{
+    "buy_line_interval": 1.0,
+    "sell_line_interval": 1.0,
+    "interval_mul": 1.1,
+    "rsi_value": 30
+}
