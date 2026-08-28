@@ -1,10 +1,10 @@
 from pybit.unified_trading import HTTP
 
-from bot.core.exchanges._base import Exchange
+from bot.core.exchanges._base import HTTPExchange
 from common.utils.types import Kline, Order
 
 
-class Bybit(Exchange):
+class Bybit(HTTPExchange):
     name = "bybit"
 
     def __init__(
@@ -20,15 +20,6 @@ class Bybit(Exchange):
         self.testnet = testnet
         self.demo = demo
         self.conn = self.connection()
-
-    def connection(self) -> HTTP:
-        return HTTP(
-            testnet=self.testnet,
-            demo=self.demo,
-            api_key=self.api_key,
-            api_secret=self.api_secret,
-            logging_level=30,
-        )
 
     @staticmethod
     def _format_kline(data: list[list[str]]) -> list[Kline]:
@@ -55,13 +46,17 @@ class Bybit(Exchange):
             for order in data
         ]
 
+    def connection(self) -> HTTP:
+        return HTTP(
+            testnet=self.testnet,
+            demo=self.demo,
+            api_key=self.api_key,
+            api_secret=self.api_secret,
+            logging_level=30,
+        )
+
     def get_klines(
-        self,
-        currency: str,
-        interval: str,
-        category: str = "spot",
-        *args,
-        **kwargs,
+        self, currency: str, interval: int, category: str = "spot", **kwargs
     ) -> list[Kline]:
         klines = self.conn.get_kline(
             category=category,
@@ -73,12 +68,7 @@ class Bybit(Exchange):
             raise ValueError("Something goes wrong")
         return self._format_kline(klines["result"]["list"])[::-1]
 
-    def get_orders(
-        self,
-        category: str,
-        *args,
-        **kwargs,
-    ) -> list:
+    def get_orders(self, category: str, **kwargs) -> list:
         orders = self.conn.get_open_orders(
             category=category,
             **kwargs,
@@ -87,12 +77,7 @@ class Bybit(Exchange):
             raise ValueError("Something goes wrong")
         return self._format_orders(orders["result"]["list"])
 
-    def place_buy_order(
-        self,
-        category: str,
-        symbol: str,
-        qty: str,
-    ) -> None:
+    def place_buy_order(self, category: str, symbol: str, qty: str) -> None:
         """qty in USDT"""
 
         order = self.conn.place_order(
@@ -106,12 +91,7 @@ class Bybit(Exchange):
         if order.get("retCode") != 0:
             raise ValueError("Something goes wrong")
 
-    def place_sell_order(
-        self,
-        category: str,
-        symbol: str,
-        qty: str,
-    ) -> None:
+    def place_sell_order(self, category: str, symbol: str, qty: str) -> None:
         """qty in USDT"""
 
         order = self.conn.place_order(
@@ -126,8 +106,16 @@ class Bybit(Exchange):
         if order.get("retCode") != 0:
             raise ValueError("Something goes wrong")
 
-    def get_order_history(self) -> list[Order]:
-        history = self.conn.get_order_history(category="spot")
+    def get_order_history(self, category: str) -> list[Order]:
+        history = self.conn.get_order_history(category=category)
         if history.get("retCode") != 0:
             raise ValueError("Something goes wrong")
         return self._format_orders(history["result"]["list"])
+
+    def get_min_amount(self, category: str, symbol: str) -> float:
+        amount = self.conn.get_instruments_info(category=category, symbol=symbol)
+
+        if amount.get("retCode") != 0:
+            raise ValueError()
+
+        return float(amount["result"]["list"][0]["lotSizeFilter"]["minOrderAmt"])

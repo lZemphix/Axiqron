@@ -19,32 +19,41 @@ class Settings(BaseSettings):
 
 class Config:
     def __init__(self):
-        self.base_dir = Path("../..")
-        self.path = "common/configs/bot_config.json"
+        # Путь к корню проекта, а не относительный путь от места запуска Python.
+        self.base_dir = Path(__file__).resolve().parents[2]
+        self.path = self.base_dir / "common" / "configs" / "bot_config.json"
 
-    def _get_confing(self) -> dict:
-        with open(self.path) as f:
+    def _get_config(self) -> dict:
+        with self.path.open(encoding="utf-8") as f:
             return json.load(f)
 
-    def get_currency(self):
-        conf = self._get_confing()
+    def get_exchange(self) -> str:
+        conf = self._get_config()
+        return conf["exchange"]
+
+    def get_currency(self) -> str:
+        conf = self._get_config()
         return conf["currency"]
 
-    def get_buy_price(self):
-        conf = self._get_confing()
+    def get_buy_price(self) -> float:
+        conf = self._get_config()
         return conf["buy_price"]
 
-    def get_sell_price(self):
-        conf = self._get_confing()
+    def get_sell_price(self) -> float:
+        conf = self._get_config()
         return conf["sell_price"]
 
-    def get_max_loss_percent(self):
-        conf = self._get_confing()
+    def get_max_loss_percent(self) -> float:
+        conf = self._get_config()
         return conf["max_loss_percent"]
 
-    def get_max_open_orders(self):
-        conf = self._get_confing()
+    def get_max_open_orders(self) -> int:
+        conf = self._get_config()
         return conf["max_open_orders"]
+
+    def get_interval(self) -> int:
+        conf = self._get_config()
+        return conf["interval"]
 
 
 settings = Settings()

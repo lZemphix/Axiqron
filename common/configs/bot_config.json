@@ -1,5 +1,7 @@
 {
+    "exchange": "bybit",
     "currency": "BTCUSDT",
+    "interval": 5,
     "buy_price": 5.0,
     "sell_price": 5.0,
     "max_loss_percent": 5,
